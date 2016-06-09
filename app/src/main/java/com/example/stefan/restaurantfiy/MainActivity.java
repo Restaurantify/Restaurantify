@@ -1,6 +1,7 @@
 package com.example.stefan.restaurantfiy;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -35,5 +36,10 @@ public class MainActivity extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void neuRegistrieren()
+    {
+        Intent intent = new Intent();
     }
 }

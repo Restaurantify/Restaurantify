@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Rechnung"
+        android:id="@+id/textView2"
+        android:layout_weight="0.04" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="277dp"
+        android:id="@+id/listView3"
+        android:layout_weight="0.27" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Preis: "
+        android:id="@+id/textView3"
+        android:layout_weight="0.18" />
+
+    <EditText
+        android:layout_width="282dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Abschließen"
+        android:id="@+id/buttonAbschließend"
+        android:layout_weight="0.04" />
+
+</LinearLayout>

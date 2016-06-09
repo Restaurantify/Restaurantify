@@ -40,6 +40,7 @@ public class MainActivity extends Activity {
 
     public void neuRegistrieren()
     {
-        Intent intent = new Intent();
+        Intent intent = new Intent(this, RegistrierungActivity.class);
+        startActivity(intent);
     }
 }

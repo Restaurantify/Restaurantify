@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.gson.Gson;
+
 import java.util.jar.Manifest;
 
 
@@ -17,6 +19,10 @@ public class MainActivity extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Bestellung bestellung = new Bestellung();
+        Gson gson = new Gson();
+        String json = gson.toJson(bestellung);
     }
 
     @Override
@@ -25,6 +31,8 @@ public class MainActivity extends Activity{
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

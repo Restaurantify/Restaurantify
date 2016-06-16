@@ -1,6 +1,7 @@
 package com.example.stefan.restaurantfiy;
 
 import android.app.Activity;
+<<<<<<< HEAD
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -16,4 +17,13 @@ public class RegistrierungActivity extends Activity {
         Intent intent = getIntent();
 
     }
+=======
+
+/**
+ * Created by Test on 09.06.2016.
+ */
+public class RegistrierungActivity extends Activity
+{
+
+>>>>>>> 5d6cf9074bdcda405bc20c270a0b03715811ae11
 }

@@ -54,8 +54,10 @@
         android:layout_height="wrap_content"
         android:text="OK"
         android:id="@+id/okBTN"
+        android:onClick="Ok"
         android:layout_centerVertical="true"
-        android:layout_alignEnd="@+id/passwortTV" />
+        android:layout_alignEnd="@+id/passwortTV"
+        android:nestedScrollingEnabled="false" />
 
     <Button
         style="?android:attr/buttonStyleSmall"

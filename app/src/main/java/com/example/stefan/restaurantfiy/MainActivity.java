@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.google.gson.Gson;
 
@@ -39,7 +40,7 @@ public class MainActivity extends Activity{
         return super.onOptionsItemSelected(item);
     }
 
-    public void neuRegistrieren()
+    public void neuRegistrieren(View view)
     {
         Intent intent = new Intent(this, RegistrierungActivity.class);
         startActivity(intent);

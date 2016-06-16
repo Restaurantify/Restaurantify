@@ -19,12 +19,15 @@ public class ProductsHelper extends SQLiteOpenHelper
     }
 
     @Override
-    public void onCreate(SQLiteDatabase sqLiteDatabase) {
-
+    public void onCreate(SQLiteDatabase db)
+    {
+        db.execSQL(ProductsTBL.SQL_CREATE);
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
+    {
+        db.execSQL(ProductsTBL.SQL_DROP);
+        onCreate(db);
     }
 }

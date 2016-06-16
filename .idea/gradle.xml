@@ -12,17 +12,13 @@
             <option value="$PROJECT_DIR$/app" />
           </set>
         </option>
-<<<<<<< HEAD
-=======
         <option name="myModules">
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
           </set>
         </option>
->>>>>>> 5d6cf9074bdcda405bc20c270a0b03715811ae11
       </GradleProjectSettings>
     </option>
   </component>
 </project>
-

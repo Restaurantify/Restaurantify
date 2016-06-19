@@ -67,9 +67,5 @@ public class MainActivity extends Activity{
             Toast.makeText(this, "Username und Passwort nicht gefunden", Toast.LENGTH_SHORT).show();
 
         }
-
-
-
-
     }
 }

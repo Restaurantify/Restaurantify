@@ -27,4 +27,5 @@
         android:id="@+id/listView2"
         android:layout_alignTop="@+id/listView"
         android:layout_alignParentEnd="true" />
+
 </RelativeLayout>

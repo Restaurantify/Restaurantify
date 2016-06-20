@@ -25,5 +25,4 @@ public class Products extends Activity{
         view.setAdapter(adapter);
     }
 
-
 }

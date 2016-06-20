@@ -19,7 +19,6 @@ import java.util.jar.Manifest;
 public class MainActivity extends Activity{
 
     public static final String TAG = MainActivity.TAG;
-    LoginHelper helper = new LoginHelper(this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +28,8 @@ public class MainActivity extends Activity{
         Gson gson = new Gson();
         String json = gson.toJson(bestellung);
     }
+
+    //asdfghjklasdfghhhhhgg
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -42,30 +43,5 @@ public class MainActivity extends Activity{
 
         int id = item.getItemId();
         return super.onOptionsItemSelected(item);
-    }
-
-    public void neuRegistrieren(View view)
-    {
-        Intent intent = new Intent(this, RegistrierungActivity.class);
-        startActivity(intent);
-    }
-
-    public void okBtn(View view)
-    {
-        EditText uname = (EditText)findViewById(R.id.nameET);
-        EditText pass = (EditText)findViewById(R.id.passwortET);
-        String username = uname.getText().toString();
-        String passwort = pass.getText().toString();
-        String searchPW = helper.searchPass(username);
-        if(passwort.equals(searchPW))
-        {
-            Intent i = new Intent(this,Details.class);
-            i.putExtra("Username",username);
-        }
-        else
-        {
-            Toast.makeText(this, "Username und Passwort nicht gefunden", Toast.LENGTH_SHORT).show();
-
-        }
     }
 }

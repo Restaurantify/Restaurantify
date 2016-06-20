@@ -2,6 +2,8 @@ package com.example.stefan.restaurantfiy;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteStatement;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,16 +19,46 @@ import java.util.jar.Manifest;
 
 
 public class MainActivity extends Activity{
-
+    SQLiteDatabase db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        db.execSQL(TischTBL.SQL_CREATE);
+        seed(db);
 
         Bestellung bestellung = new Bestellung();
         Gson gson = new Gson();
         String json = gson.toJson(bestellung);
 
+
+    }
+
+    private void seed(SQLiteDatabase db) {
+        final SQLiteStatement stmt = db.compileStatement(TischTBL.STMT_INSERT);
+        db.beginTransaction();
+        try
+        {
+            insertTisch(stmt, "Tisch 1", 0);
+            insertTisch(stmt, "Tisch 2", 0);
+            insertTisch(stmt, "Tisch 3", 0);
+            db.setTransactionSuccessful();
+        }
+        catch (Exception exc)
+        {
+            exc.printStackTrace();
+        }
+        finally {
+            db.endTransaction();
+        }
+
+
+    }
+
+    private void insertTisch(SQLiteStatement stmt, String TischNr, int besetzt) {
+        stmt.bindString(1, TischNr);
+        stmt.bindLong(2, besetzt);
+        stmt.executeInsert();
     }
 
     @Override
@@ -39,6 +71,15 @@ public class MainActivity extends Activity{
     public boolean onOptionsItemSelected(MenuItem item) {
 
         int id = item.getItemId();
-        return super.onOptionsItemSelected(item);
+        switch(id)
+        {
+            case R.id.neuerTisch:
+                return true;
+            case R.id.neuesProdukt:
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
     }
 }

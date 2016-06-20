@@ -6,7 +6,6 @@
         android:id="@+id/neuerTisch"
         android:title="neuer Tisch"
         android:showAsAction="never">
-
     </item>
 
     <item

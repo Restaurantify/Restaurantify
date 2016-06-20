@@ -11,7 +11,7 @@ public class TischTBL {
     public final static String TischId = "TischID";
     public final static String TischNr = "TischNr";
     public final static String Besetzt = "Besetzt";
-
+    public static final String [] ALL_COLUMNS = new String[] {TischId + "AS_id", TischNr, Besetzt};
 
     public static final String SQL_DROP = "DROP TABLE IF EXISTS " + TABLE_NAME;
     public static final String SQL_CREATE =
@@ -19,11 +19,11 @@ public class TischTBL {
                     "(" +
                     TischId + " INTEGER PRIMARY KEY," +
                     TischNr + " TEXT NOT NULL," +
-                    Besetzt + " INTEGER" +
+                    Besetzt + " INT NOT NULL" +
                     ")";
     public static final String STMT_DELETE = "DELETE FROM " + TABLE_NAME;
     public static final String STMT_INSERT =
             "INSERT INTO " + TABLE_NAME +
-                    "(" + TischId + "," + TischNr + "," + Besetzt + ") " +
-                    "VALUES (?,?,?)";
+                    "(" + TischNr + "," + Besetzt + ") " +
+                    "VALUES (?,?)";
 }

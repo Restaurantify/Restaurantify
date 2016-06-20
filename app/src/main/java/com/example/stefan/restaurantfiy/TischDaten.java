@@ -1,12 +1,17 @@
 package com.example.stefan.restaurantfiy;
 
-import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 
@@ -24,7 +29,7 @@ public class TischDaten extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
-        getMenuInflater().inflate(R.menu.products_hinzufuegen, menu);
+        getMenuInflater().inflate(R.menu.products_hinzufuegen_menu, menu);
         return super.onCreateOptionsMenu(menu);
 
     }

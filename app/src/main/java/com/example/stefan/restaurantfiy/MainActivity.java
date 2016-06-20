@@ -1,6 +1,7 @@
 package com.example.stefan.restaurantfiy;
 
 import android.app.Activity;
+import android.app.ListActivity;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
@@ -8,26 +9,49 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.internal.Streams;
 
+import java.util.ArrayList;
 import java.util.StringTokenizer;
 import java.util.jar.Manifest;
 
 
-public class MainActivity extends Activity{
-    SQLiteDatabase db;
+public class MainActivity extends ListActivity {
+    ArrayList<Tisch> items = new ArrayList<Tisch>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        TischHelper helper = new TischHelper(this);
+        SQLiteDatabase db = helper.getWritableDatabase();
         db.execSQL(TischTBL.SQL_CREATE);
         seed(db);
+        initListData();
+        displayItems();
 
 
+
+    }
+
+    @Override
+    protected void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+        String name = String.valueOf(items.get(position));
+        Toast.makeText(this, name, Toast.LENGTH_SHORT).show();
+    }
+
+    private void displayItems() {
+        final ArrayAdapter<Tisch>adapter = new ArrayAdapter<Tisch>(this,android.R.layout.simple_list_item_2,items);
+        setListAdapter(adapter);
+    }
+
+    private void initListData() {
 
     }
 

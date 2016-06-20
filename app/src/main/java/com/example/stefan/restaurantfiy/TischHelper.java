@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class TischHelper extends SQLiteOpenHelper {
     public final static String DB_NAME = "tisch.db";
-    public final static int DB_VERSION = 2;
+    public final static int DB_VERSION = 3;
 
     public TischHelper(Context context)
     {

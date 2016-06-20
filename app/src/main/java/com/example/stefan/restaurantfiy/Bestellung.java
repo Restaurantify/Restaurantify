@@ -5,14 +5,12 @@ package com.example.stefan.restaurantfiy;
  */
 public class Bestellung
 {
-    String bestellNr;
     String TischNr;
     String produkt;
     String anzahl;
     double preis;
 
-    public Bestellung(String bestellNr, String tischNr, String produkt, String anzahl, double preis) {
-        this.bestellNr = bestellNr;
+    public Bestellung( String tischNr, String produkt, String anzahl, double preis) {
         TischNr = tischNr;
         this.produkt = produkt;
         this.anzahl = anzahl;
@@ -25,7 +23,6 @@ public class Bestellung
     @Override
     public String toString() {
         return "Bestellung{" +
-                "bestellNr='" + bestellNr + '\'' +
                 ", TischNr='" + TischNr + '\'' +
                 ", produkt='" + produkt + '\'' +
                 ", anzahl='" + anzahl + '\'' +
@@ -33,13 +30,7 @@ public class Bestellung
                 '}';
     }
 
-    public String getBestellNr() {
-        return bestellNr;
-    }
 
-    public void setBestellNr(String bestellNr) {
-        this.bestellNr = bestellNr;
-    }
 
     public String getTischNr() {
         return TischNr;

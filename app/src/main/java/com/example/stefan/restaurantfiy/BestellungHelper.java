@@ -10,7 +10,6 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 public class BestellungHelper extends SQLiteOpenHelper
 {
-    private final static String TAG = MainActivity.TAG;
     private final static String DB_NAME = "bestellung.db";
     private final static int DB_VERSION = 2;
 

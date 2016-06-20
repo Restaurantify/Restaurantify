@@ -20,11 +20,4 @@
         android:layout_below="@+id/textViewTischNr"
         android:layout_alignParentStart="true" />
 
-    <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/listView2"
-        android:layout_alignTop="@+id/listView"
-        android:layout_alignParentEnd="true" />
-
 </RelativeLayout>

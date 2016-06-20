@@ -1,7 +1,5 @@
 package com.example.stefan.restaurantfiy;
 
-import android.app.ActionBar;
-import android.app.Activity;
 import android.app.ListActivity;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -34,7 +32,7 @@ public class TischDaten extends ListActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
-        getMenuInflater().inflate(R.menu.products_hinzufuegen, menu);
+        getMenuInflater().inflate(R.menu.products_hinzufuegen_menu, menu);
         return super.onCreateOptionsMenu(menu);
 
     }
@@ -76,18 +74,14 @@ public class TischDaten extends ListActivity {
 
         while (res.moveToNext())
         {
-
             String jsonName = res.getString(indxName);
             Products product = gson.fromJson(jsonName,Products.class);
             String productname = product.getName();
             best.setPreis(res.getString(indxPrice));
             best.setName(productname);
             orders.add(best);
-
         }
-
         return orders;
-
     }
 
 }

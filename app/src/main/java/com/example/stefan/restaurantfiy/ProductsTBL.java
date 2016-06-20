@@ -19,6 +19,5 @@ public class ProductsTBL
     public static final String STMT_INSERT =
             "INSERT INTO" + TABLE_NAME;
 
-
     //noch nicht fertig nur das keine Fehler mehr sind in der ProductsHelper Klasse!!!!
 }

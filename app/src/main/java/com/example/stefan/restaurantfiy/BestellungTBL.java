@@ -18,7 +18,6 @@ public class BestellungTBL
     public final static String Preis = "Preis";
     public static final String[] ALL_COLUMNS = new String[] {BestellId + "AS_id", TischNr, Produkt, Anzahl, Preis};
 
-
     public static final String SQL_DROP = "DROP TABLE IF EXISTS" + TABLE_NAME;
     public static final String SQL_CREATE =
             "CREATE TABLE " + TABLE_NAME +

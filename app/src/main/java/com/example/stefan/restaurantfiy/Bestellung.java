@@ -5,22 +5,22 @@ package com.example.stefan.restaurantfiy;
  */
 public class Bestellung {
 
-    int Produkt;
-    int Anzahl;
+    String Name;
+    String preis;
 
-    public int getAnzahl() {
-        return Anzahl;
+    public String getName() {
+        return Name;
     }
 
-    public void setAnzahl(int anzahl) {
-        Anzahl = anzahl;
+    public void setName(String name) {
+        Name = name;
     }
 
-    public int getProdukt() {
-        return Produkt;
+    public String getPreis() {
+        return preis;
     }
 
-    public void setProdukt(int produkt) {
-        Produkt = produkt;
+    public void setPreis(String preis) {
+        this.preis = preis;
     }
 }

@@ -13,17 +13,17 @@ public class TischTBL {
     public final static String Besetzt = "Besetzt";
 
 
-    public static final String SQL_DROP = "DROP TABLE IF EXISTS" + TABLE_NAME;
+    public static final String SQL_DROP = "DROP TABLE IF EXISTS " + TABLE_NAME;
     public static final String SQL_CREATE =
             "CREATE TABLE " + TABLE_NAME +
                     "(" +
-                    TischId + "INTEGER PRIMARY KEY," +
-                    TischNr + "TEXT NOT NULL" +
-                    Besetzt + "INTEGER" +
+                    TischId + " INTEGER PRIMARY KEY," +
+                    TischNr + " TEXT NOT NULL," +
+                    Besetzt + " INTEGER" +
                     ")";
-    public static final String STMT_DELETE = "DELETE FROM" + TABLE_NAME;
+    public static final String STMT_DELETE = "DELETE FROM " + TABLE_NAME;
     public static final String STMT_INSERT =
-            "INSERT INTO" + TABLE_NAME +
-                    "(" + TischId + "," + TischNr + "," + Besetzt + ")" +
+            "INSERT INTO " + TABLE_NAME +
+                    "(" + TischId + "," + TischNr + "," + Besetzt + ") " +
                     "VALUES (?,?,?)";
 }

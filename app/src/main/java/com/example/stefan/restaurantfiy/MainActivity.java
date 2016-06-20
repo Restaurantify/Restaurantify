@@ -23,9 +23,6 @@ public class MainActivity extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Bestellung bestellung = new Bestellung();
-        Gson gson = new Gson();
-        String json = gson.toJson(bestellung);
 
     }
 

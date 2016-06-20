@@ -1,7 +1,9 @@
 package com.example.stefan.restaurantfiy;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
@@ -9,8 +11,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.LinearInterpolator;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -95,6 +99,7 @@ public class MainActivity extends ListActivity {
         switch(id)
         {
             case R.id.neuerTisch:
+                neuerTisch();
                 return true;
             case R.id.neuesProdukt:
                 return true;
@@ -102,5 +107,19 @@ public class MainActivity extends ListActivity {
                 return super.onOptionsItemSelected(item);
         }
 
+    }
+
+    private void neuerTisch() {
+        AlertDialog.Builder alert = new AlertDialog.Builder(getApplicationContext());
+        final LinearLayout vDialog = (LinearLayout) getLayoutInflater().inflate(R.layout.dialogtisch, null);
+        alert.setView(vDialog);
+        alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        alert.setNegativeButton("Cancel", null);
+        alert.show();
     }
 }

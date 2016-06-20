@@ -48,6 +48,8 @@ public class TischDaten extends Activity {
         ArrayList<Bestellung> orders = new ArrayList<>();
         String tischnr = null;
         Gson gson = new Gson();
+
+        Bestellung best = new Bestellung();
         BestellungHelper helper = new BestellungHelper(this);
         SQLiteDatabase db = helper.getReadableDatabase();
 
@@ -64,10 +66,17 @@ public class TischDaten extends Activity {
 
         while (res.moveToNext())
         {
+
             String jsonName = res.getString(indxName);
             Products product = gson.fromJson(jsonName,Products.class);
-            product.get
+            String productname = product.getName();
+            best.setPreis(res.getString(indxPrice));
+            best.setName(productname);
+            orders.add(best);
+
         }
+
+        return orders;
 
     }
 

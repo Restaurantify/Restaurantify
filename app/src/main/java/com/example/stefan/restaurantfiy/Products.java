@@ -21,8 +21,6 @@ public class Products extends Activity{
         list.add(2,"Test2");
         list.add(3,"Test3");
 
-        ArrayAdapter adapter = new ArrayAdapter();
-        view.setAdapter(adapter);
     }
 
 }

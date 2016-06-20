@@ -17,6 +17,8 @@
         android:id="@+id/editText2"
         android:layout_weight="0.02" />
 
+
+
     <TextView
         android:layout_width="117dp"
         android:layout_height="wrap_content"

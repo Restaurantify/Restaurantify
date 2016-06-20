@@ -27,9 +27,6 @@ public class MainActivity extends Activity{
         db.execSQL(TischTBL.SQL_CREATE);
         seed(db);
 
-        Bestellung bestellung = new Bestellung();
-        Gson gson = new Gson();
-        String json = gson.toJson(bestellung);
 
 
     }

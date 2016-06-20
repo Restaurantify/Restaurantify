@@ -6,13 +6,9 @@ import android.app.ListActivity;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-<<<<<<< Updated upstream
 import android.view.Menu;
 import android.view.MenuItem;
-=======
 import android.widget.ArrayAdapter;
->>>>>>> Stashed changes
-
 import com.google.gson.Gson;
 
 import java.util.ArrayList;

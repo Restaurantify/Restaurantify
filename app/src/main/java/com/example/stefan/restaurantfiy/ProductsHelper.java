@@ -9,7 +9,6 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 public class ProductsHelper extends SQLiteOpenHelper
 {
-    public final static String TAG = MainActivity.TAG;
     public final static String DB_NAME = "product.db";
     public final static int DB_VERSION = 2;
 

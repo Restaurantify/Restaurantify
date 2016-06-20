@@ -26,6 +26,7 @@ public class MainActivity extends Activity{
         Bestellung bestellung = new Bestellung();
         Gson gson = new Gson();
         String json = gson.toJson(bestellung);
+
     }
 
     @Override

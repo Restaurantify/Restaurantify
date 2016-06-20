@@ -11,6 +11,7 @@ import java.util.ArrayList;
  */
 public class Products extends Activity{
 
+
     protected void onCreate()
     {
         setContentView(R.layout.products);
@@ -20,9 +21,5 @@ public class Products extends Activity{
         list.add(1,"Test1");
         list.add(2,"Test2");
         list.add(3,"Test3");
-
-        ArrayAdapter adapter = new ArrayAdapter();
-        view.setAdapter(adapter);
     }
-
 }

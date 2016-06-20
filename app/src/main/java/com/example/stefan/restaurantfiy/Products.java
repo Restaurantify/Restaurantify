@@ -18,7 +18,6 @@ public class Products extends Activity
     String Vegan;
 
 
-
     public Products(String name, String preis, String normal, String vegetarisch, String vegan) {
         Name = name;
         Preis = preis;

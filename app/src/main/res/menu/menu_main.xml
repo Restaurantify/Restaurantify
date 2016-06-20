@@ -1,21 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <menu
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
         android:id="@+id/neuerTisch"
         android:title="neuer Tisch"
-        android:showAsAction="never"
-        ></item>
+        android:showAsAction="never">
+
+    </item>
 
     <item
         android:id="@+id/neuesProdukt"
         android:title="neues Produkt"
         android:orderInCategory="100"
         android:showAsAction="never" />
-
-
 </menu>

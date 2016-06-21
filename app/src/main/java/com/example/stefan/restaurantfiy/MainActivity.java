@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
 import android.os.Bundle;
@@ -32,15 +33,38 @@ public class MainActivity extends ListActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ArrayList<Tisch> tische = readDatabase();
+        Tisch t1 = new Tisch("Tisch 1", 0);
+        tische.add(t1);
+        displayItems(tische);
+
+
+
+
+    }
+
+    private ArrayList readDatabase() {
         TischHelper helper = new TischHelper(this);
-        SQLiteDatabase db = helper.getWritableDatabase();
-        db.execSQL(TischTBL.SQL_CREATE);
-        seed(db);
-        initListData();
-        displayItems();
+        SQLiteDatabase db = helper.getReadableDatabase();
+        ArrayList<Tisch> tischListe = new ArrayList<>();
+        Cursor res = db.query(TischTBL.TABLE_NAME,
+                TischTBL.ALL_COLUMNS,
+                null,
+                null,
+                null,
+                null,
+                TischTBL.TischNr,
+                null);
 
+        int indxTischNr = res.getColumnIndex(TischTBL.TischNr);
+        int indxBesetzt = res.getColumnIndex(TischTBL.Besetzt);
 
-
+        while(res.moveToNext())
+        {
+            Tisch t = new Tisch(res.getString(indxTischNr),res.getInt(indxBesetzt));
+            tischListe.add(t);
+        }
+        return tischListe;
     }
 
     @Override
@@ -50,8 +74,8 @@ public class MainActivity extends ListActivity {
         Toast.makeText(this, name, Toast.LENGTH_SHORT).show();
     }
 
-    private void displayItems() {
-        final ArrayAdapter<Tisch>adapter = new ArrayAdapter<Tisch>(this,android.R.layout.simple_list_item_2,items);
+    private void displayItems(ArrayList<Tisch> tische) {
+        final ArrayAdapter<Tisch>adapter = new ArrayAdapter<Tisch>(this,android.R.layout.simple_list_item_1,tische);
         setListAdapter(adapter);
     }
 
@@ -59,32 +83,6 @@ public class MainActivity extends ListActivity {
 
     }
 
-    private void seed(SQLiteDatabase db) {
-        final SQLiteStatement stmt = db.compileStatement(TischTBL.STMT_INSERT);
-        db.beginTransaction();
-        try
-        {
-            insertTisch(stmt, "Tisch 1", 0);
-            insertTisch(stmt, "Tisch 2", 0);
-            insertTisch(stmt, "Tisch 3", 0);
-            db.setTransactionSuccessful();
-        }
-        catch (Exception exc)
-        {
-            exc.printStackTrace();
-        }
-        finally {
-            db.endTransaction();
-        }
-
-
-    }
-
-    private void insertTisch(SQLiteStatement stmt, String TischNr, int besetzt) {
-        stmt.bindString(1, TischNr);
-        stmt.bindLong(2, besetzt);
-        stmt.executeInsert();
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -110,16 +108,15 @@ public class MainActivity extends ListActivity {
     }
 
     private void neuerTisch() {
-        AlertDialog.Builder alert = new AlertDialog.Builder(getApplicationContext());
-        final LinearLayout vDialog = (LinearLayout) getLayoutInflater().inflate(R.layout.dialogtisch, null);
-        alert.setView(vDialog);
-        alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
+        final EditText txtNewName = new EditText(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Tisch eingeben")
+                .setCancelable(false)
+                .setView(txtNewName);
+                //.setPositiveButton(getResources().getString(R.string.ok), new DialogInterface().
 
-            }
-        });
-        alert.setNegativeButton("Cancel", null);
-        alert.show();
+
+        //muss man noch fertig machen
+
     }
 }

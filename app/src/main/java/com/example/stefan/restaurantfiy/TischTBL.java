@@ -11,7 +11,7 @@ public class TischTBL {
     public final static String TischId = "TischID";
     public final static String TischNr = "TischNr";
     public final static String Besetzt = "Besetzt";
-    public static final String [] ALL_COLUMNS = new String[] {TischId + "AS_id", TischNr, Besetzt};
+    public static final String [] ALL_COLUMNS = new String[] {TischId + " AS_id", TischNr, Besetzt};
 
     public static final String SQL_DROP = "DROP TABLE IF EXISTS " + TABLE_NAME;
     public static final String SQL_CREATE =

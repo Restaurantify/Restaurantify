@@ -12,30 +12,35 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.LinearInterpolator;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.internal.Streams;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.StringTokenizer;
 import java.util.jar.Manifest;
 
 
 public class MainActivity extends ListActivity {
-    ArrayList<Tisch> items = new ArrayList<Tisch>();
+
+    final List<String[]> tische = new LinkedList<String[]>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ArrayList<Tisch> tische = readDatabase();
-        Tisch t1 = new Tisch("Tisch 1", 0);
-        tische.add(t1);
+
+        readDatabase();
         displayItems(tische);
 
 
@@ -43,10 +48,29 @@ public class MainActivity extends ListActivity {
 
     }
 
-    private ArrayList readDatabase() {
+    private void displayItems(final List<String[]> tische) {
+
+        final ArrayAdapter<String[]> adapter = new ArrayAdapter<String[]>(this, android.R.layout.simple_list_item_2,android.R.id.text1, tische) {
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                View view = super.getView(position, convertView, parent);
+                String[] entry = tische.get(position);
+                TextView text1 = (TextView) view.findViewById(android.R.id.text1);
+                TextView text2 = (TextView) view.findViewById(android.R.id.text2);
+
+                text1.setText(entry[0]);
+                text2.setText(entry[1]);
+
+                return view;
+            }
+
+        };
+        setListAdapter(adapter);
+    }
+    private void readDatabase() {
         TischHelper helper = new TischHelper(this);
         SQLiteDatabase db = helper.getReadableDatabase();
-        ArrayList<Tisch> tischListe = new ArrayList<>();
+
         Cursor res = db.query(TischTBL.TABLE_NAME,
                 TischTBL.ALL_COLUMNS,
                 null,
@@ -59,25 +83,26 @@ public class MainActivity extends ListActivity {
         int indxTischNr = res.getColumnIndex(TischTBL.TischNr);
         int indxBesetzt = res.getColumnIndex(TischTBL.Besetzt);
 
-        while(res.moveToNext())
-        {
-            Tisch t = new Tisch(res.getString(indxTischNr),res.getInt(indxBesetzt));
-            tischListe.add(t);
+        while (res.moveToNext()) {
+            String isfree;
+            if (res.getString(indxBesetzt) == "0") {
+                isfree="Frei";
+            } else {
+               isfree="Besetzt";
+            }
+            String[] string = {res.getString(indxTischNr), isfree};
+            tische.add(string);
+
         }
-        return tischListe;
     }
 
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
-        String name = String.valueOf(items.get(position));
+        String name = String.valueOf(tische.get(position));
         Toast.makeText(this, name, Toast.LENGTH_SHORT).show();
     }
 
-    private void displayItems(ArrayList<Tisch> tische) {
-        final ArrayAdapter<Tisch>adapter = new ArrayAdapter<Tisch>(this,android.R.layout.simple_list_item_1,tische);
-        setListAdapter(adapter);
-    }
 
     private void initListData() {
 

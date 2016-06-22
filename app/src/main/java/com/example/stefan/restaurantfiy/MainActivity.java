@@ -135,13 +135,30 @@ public class MainActivity extends ListActivity {
     private void neuerTisch() {
         final EditText txtNewName = new EditText(this);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Tisch eingeben")
+        builder.setMessage("Tischnummer eingeben")
                 .setCancelable(false)
-                .setView(txtNewName);
-                //.setPositiveButton(getResources().getString(R.string.ok), new DialogInterface().
+                .setView(txtNewName)
+                .setPositiveButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String newName = "Tisch " + txtNewName.getText().toString();
+
+                    }
+                })
+                .setNegativeButton("Abbrechen", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog aler = builder.create();
+        aler.show();
+
+        }
 
 
-        //muss man noch fertig machen
+
+
 
     }
-}

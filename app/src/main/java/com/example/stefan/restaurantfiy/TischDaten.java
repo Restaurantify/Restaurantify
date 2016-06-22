@@ -1,12 +1,15 @@
 package com.example.stefan.restaurantfiy;
 
 import android.app.ListActivity;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
+import android.widget.TextView;
+
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -15,9 +18,15 @@ import java.util.ArrayList;
  * Created by felixdeixler on 20.06.16.
  */
 public class TischDaten extends ListActivity {
+    String tischnr;
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tisch_daten);
+        Intent intent = getIntent();
+        Bundle params = intent.getExtras();
+        tischnr = params.getString("Tischnummer");
+        TextView view = (TextView) findViewById(R.id.textViewTischNr);
+        view.setText(tischnr);
         ArrayList <Bestellung> best = new ArrayList<>();
         best = getOrders();
         showinList(best);
@@ -54,7 +63,7 @@ public class TischDaten extends ListActivity {
     public ArrayList getOrders()
     {
         ArrayList<Bestellung> orders = new ArrayList<>();
-        String tischnr = null; //wird von main übergeben
+
         Gson gson = new Gson();
 
         Bestellung best = new Bestellung();

@@ -3,12 +3,15 @@ package com.example.stefan.restaurantfiy;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
+import android.nfc.Tag;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,6 +27,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.internal.Streams;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -31,17 +35,19 @@ import java.util.StringTokenizer;
 import java.util.jar.Manifest;
 
 
-public class MainActivity extends ListActivity {
+public class MainActivity extends ListActivity implements Serializable{
 
     final List<String[]> tische = new LinkedList<String[]>();
-
+    TischHelper helper = new TischHelper(this);
+    SQLiteDatabase db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        db = helper.getWritableDatabase();
         readDatabase();
-        displayItems(tische);
+
 
 
 
@@ -68,9 +74,9 @@ public class MainActivity extends ListActivity {
         setListAdapter(adapter);
     }
     private void readDatabase() {
-        TischHelper helper = new TischHelper(this);
-        SQLiteDatabase db = helper.getReadableDatabase();
-
+        //TischHelper helper = new TischHelper(this);
+        //SQLiteDatabase db = helper.getReadableDatabase();
+        tische.clear();
         Cursor res = db.query(TischTBL.TABLE_NAME,
                 TischTBL.ALL_COLUMNS,
                 null,
@@ -85,22 +91,25 @@ public class MainActivity extends ListActivity {
 
         while (res.moveToNext()) {
             String isfree;
-            if (res.getString(indxBesetzt) == "0") {
-                isfree="Frei";
+            if (res.getString(indxBesetzt) == "1") {
+                isfree="Besetzt";
             } else {
-               isfree="Besetzt";
+               isfree="Frei";
             }
             String[] string = {res.getString(indxTischNr), isfree};
             tische.add(string);
-
+            displayItems(tische);
         }
     }
 
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
-        String name = String.valueOf(tische.get(position));
-        Toast.makeText(this, name, Toast.LENGTH_SHORT).show();
+        String[] name = tische.get(position);
+        String tischnr = name[0];
+        Intent intent = new Intent(this, TischDaten.class);
+        intent.putExtra("Tischnummer",tischnr);
+        startActivity(intent);
     }
 
 
@@ -142,6 +151,8 @@ public class MainActivity extends ListActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         String newName = "Tisch " + txtNewName.getText().toString();
+                        writeTabletoDB(newName);
+
 
                     }
                 })
@@ -157,8 +168,18 @@ public class MainActivity extends ListActivity {
 
         }
 
-
-
-
+    private void writeTabletoDB(String newName) {
+        Log.d("TAG","writetoDB");
+        //TischHelper helper = new TischHelper(this);
+        //SQLiteDatabase db = helper.getWritableDatabase();
+        ContentValues vals = new ContentValues();
+        vals.put(TischTBL.TischNr, newName);
+        vals.put(TischTBL.Besetzt, "O");
+        db.insert(TischTBL.TABLE_NAME,null,vals);
+        vals.clear();
+        readDatabase();
 
     }
+
+
+}

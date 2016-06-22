@@ -6,7 +6,7 @@ package com.example.stefan.restaurantfiy;
 
 public class TischTBL {
 
-    public static final String TABLE_NAME = "Tische";
+    public static final String TABLE_NAME = "Tisch";
 
     public final static String TischId = "TischID";
     public final static String TischNr = "TischNr";

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -12,11 +13,13 @@ import android.database.sqlite.SQLiteStatement;
 import android.nfc.Tag;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.LinearInterpolator;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -40,11 +43,15 @@ public class MainActivity extends ListActivity implements Serializable{
     final List<String[]> tische = new LinkedList<String[]>();
     TischHelper helper = new TischHelper(this);
     SQLiteDatabase db;
+    ListView view;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
+        super.onCreate(savedInstanceState);
+
+        setContentView(R.layout.activity_main);
+        view = getListView();
+        registerForContextMenu(view);
         db = helper.getWritableDatabase();
         readDatabase();
 
@@ -52,6 +59,32 @@ public class MainActivity extends ListActivity implements Serializable{
 
 
 
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo)
+    {
+        int id = v.getId();
+        if(id==view.getId())
+        {
+            getMenuInflater().inflate(R.menu.main_context,menu);
+        }
+        super.onCreateContextMenu(menu, v, menuInfo);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item)
+    {
+        int id = item.getItemId();
+        if(id == R.id.deleteTable)
+        {
+            ContextMenu.ContextMenuInfo info = item.getMenuInfo();
+            AdapterView.AdapterContextMenuInfo adapterInfo = (AdapterView.AdapterContextMenuInfo)info;
+            long entryId = adapterInfo.id;
+            int pos = adapterInfo.position;
+            //db.delete(TischHelper.DB_NAME, )
+        }
+        return true;
     }
 
     private void displayItems(final List<String[]> tische) {
@@ -112,10 +145,6 @@ public class MainActivity extends ListActivity implements Serializable{
         startActivity(intent);
     }
 
-
-    private void initListData() {
-
-    }
 
 
     @Override

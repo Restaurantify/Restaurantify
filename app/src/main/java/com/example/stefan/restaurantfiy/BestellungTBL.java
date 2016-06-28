@@ -1,8 +1,6 @@
 package com.example.stefan.restaurantfiy;
 
-import java.io.Serializable;
-import java.io.StreamCorruptedException;
-import java.io.StringReader;
+
 
 /**
  * Created by sgschaider on 16.06.2016.

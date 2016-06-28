@@ -23,8 +23,6 @@ public class TischHelper extends SQLiteOpenHelper {
         db.execSQL(TischTBL.SQL_CREATE);
     }
 
-
-
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
     {

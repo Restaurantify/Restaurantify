@@ -1,10 +1,7 @@
 package com.example.stefan.restaurantfiy;
 
 import android.app.Activity;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
-import java.util.ArrayList;
 
 /**
  * Created by felixdeixler on 16.06.16.
